@@ -6,6 +6,7 @@ def movieData():
     return [line.strip().split(' ') for line in open('data.txt', 'rU') if not line.isspace()]
 
 
+#calculates the distance from one user to another based on similar movies
 def manhattanDistance(user1, user2):
     distance = -1
     for movie in user1:
@@ -15,6 +16,7 @@ def manhattanDistance(user1, user2):
     return distance
 
 
+# iterates through user list and sorts based on manhattan distance
 def nearest(userX):
     distances = []
     global userList
@@ -27,6 +29,7 @@ def nearest(userX):
     return distances
 
 
+# finds nearest neighbors and append movie recommendations
 def recommender(userX):
     global userList
     limit = 5
@@ -39,6 +42,7 @@ def recommender(userX):
     return recommendations
 
 
+# calculate movie deviations from one movie to another
 def Deviations(userList):
     global frequencies, deviations
     for movies in userList.values():
@@ -53,6 +57,9 @@ def Deviations(userList):
                     deviations[movieTitle][movieTitle2] += movieRating - movieTitle2
     for (movie, rating) in deviations.iteritems():
         frequencies[movie] = int(frequencies[movie])/int(deviations[movie])
+
+
+# TODO: Implement SlopeOne recommendation algorithm
 
 userList = defaultdict(list)
 movieAndRating = {}
